@@ -151,7 +151,7 @@ function setupAccordion() {
 }
 
 // ===========================================
-// 7. 중첩 아코디언(앨범) 기능을 설정하는 함수 (✨ 최종 로직)
+// 7. 중첩 아코디언(앨범) 기능을 설정하는 함수
 // ===========================================
 function setupNestedAccordion() {
     const albumHeaders = document.querySelectorAll('.album-header');
@@ -190,7 +190,46 @@ function setupNestedAccordion() {
 }
 
 // ===========================================
-// 8. 페이지 로드 및 이벤트 리스너 설정 (✨ 수정됨)
+// 8. 현재 활성화된 페이지에 따라 사이드바 메뉴에 시각적 표시를 추가
+// ===========================================
+function highlightActiveSidebarLink() {
+    const currentPath = window.location.pathname; // 예: /2nd/1_%E3%81%9F%E3%81%A0%E5%A5%BD%E3%81%8D%E3%81%A8%E8%A8%80%E3%81%88%E3%81%9F%E3%82%89.html
+    console.log('현재 페이지 경로 (currentPath):', currentPath);
+
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+    sidebarLinks.forEach(link => {
+        const linkHref = link.getAttribute('href'); // 예: /2nd/1_ただ好きと言えたら.html
+        console.log('사이드바 링크 href:', linkHref);
+
+        // 중요: 두 값을 비교하기 전에 모두 디코딩하여 동일한 문자열로 만듭니다.
+        // 그리고 currentPath가 linkHref로 끝나는지 확인합니다.
+        if (decodeURIComponent(currentPath).endsWith(decodeURIComponent(linkHref))) {
+            console.log('--- 일치하는 링크 발견! ---'); // 디버깅용 메시지
+
+            // 현재 활성화된 링크의 <li> 요소에 'active-link' 클래스 추가
+            const listItem = link.closest('li');
+            if (listItem) {
+                listItem.classList.add('active-link');
+            }
+
+            // 상위 앨범 헤더 (h3.album-header) 활성화
+            const albumContent = link.closest('.album-content');
+            if (albumContent) {
+                albumContent.style.display = 'block'; // 앨범 내용을 펼침
+                const albumHeader = albumContent.previousElementSibling;
+                if (albumHeader && albumHeader.classList.contains('album-header')) {
+                    albumHeader.classList.add('active');
+                }
+            }
+
+            return;
+        }
+    });
+}
+
+// ===========================================
+// 9. 페이지 로드 및 이벤트 리스너 설정 (✨ 수정됨)
 // ===========================================
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. 사이드바 로드 및 이벤트 리스너 설정
@@ -201,6 +240,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 2. DOMContentLoaded에서 높이 계산 없이 바로 상태 복원
     loadAccordionState();
     loadScrollPosition();
+
+    // 3. 현재 활성화된 사이드바 링크 강조 (여기에 추가)
+    highlightActiveSidebarLink(); // 이 줄을 추가합니다.
 
     // 페이지 이동 전에 상태를 저장하는 이벤트 리스너
     const sidebar = document.querySelector('.sidebar');

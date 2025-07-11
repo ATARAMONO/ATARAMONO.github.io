@@ -26,6 +26,18 @@ header h1 { /* header 아래의 h1 */
     margin: 0;
 }
 
+h1 a {
+    color: inherit; /* 부모인 h1의 색상 상속 */
+    text-decoration: none; /* 밑줄 제거 */
+    cursor: default; /* 마우스 오버 시 커서 변경 안 함 */
+}
+
+h1 a:hover {
+    color: #effeff; /* 부모인 h1의 색상 상속 */
+    text-decoration: none; /* 밑줄 제거 */
+    cursor: default; /* 마우스 오버 시 커서 변경 안 함 */
+}
+
 /* --- 레이아웃을 위한 새로운 CSS --- */
 .container {
     display: flex; /* 자식 요소들을 가로로 나란히 배치 */
@@ -110,6 +122,14 @@ header h1 { /* header 아래의 h1 */
 .sidebar a:hover {
     background-color: #3a3f47; /* 호버 시 배경색 변경 */
     color: #61dafb;
+}
+
+.sidebar ul li.active-link a {
+    color: #00ffd5; /* 활성화된 링크의 글자색 */
+    font-weight: bold; /* 활성화된 링크를 굵게 */
+    /* background-color: #4a4f57; 배경색 추가 */
+    border-left: 3px solid #00ffd5;
+    margin-left: -3px;
 }
 
 /* 푸터 스타일 */
@@ -235,6 +255,10 @@ li.accordion-item {
     color: #c28ace;
 }
 
+.accordion-header.active:hover {
+    background-color: transparent; /* 호버 시 배경색 변경 */
+    color: #ffffff;
+}
 
 /* 아코디언 내용 */
 .accordion-content {
@@ -309,6 +333,11 @@ li.accordion-item {
 /* 앨범 제목이 활성화되었을 때 */
 .album-header.active {
     color: #c28ace; /* 활성화 시 색상 변경 */
+}
+
+.album-header.active:hover {
+    background-color: #3a3f47;
+    color: #ffffff;
 }
 
 /* 앨범 노래 목록 (펼쳐질 내용) */
