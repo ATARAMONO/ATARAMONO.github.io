@@ -1,0 +1,326 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 가로 스크롤바 방지 */
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #282c34;
+    color: #f0f0f0;
+}
+
+header {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 445px;
+    border-bottom: 1px solid #444;
+    /* 헤더는 문서 흐름에 따라 상단에 위치하고, 고정하지 않습니다. */
+    /* position: fixed; top: 0; left: 0; width: 100%; z-index: 999; */
+    /* 만약 헤더를 고정하고 싶다면 이 부분을 활성화하고, main-content에 padding-top을 더 추가해야 합니다. */
+}
+
+header h1 { /* header 아래의 h1 */
+    font-size: 60px;
+    color: #B0B0B0;
+    margin: 0;
+}
+
+/* --- 레이아웃을 위한 새로운 CSS --- */
+.container {
+    display: flex; /* 자식 요소들을 가로로 나란히 배치 */
+    min-height: calc(100vh - 120px); /* 뷰포트 높이에서 헤더/푸터 높이만큼 뺀 최소 높이 (스크롤 시) */
+    padding-top: 20px; /* 헤더와의 간격 */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px 0px;
+    margin-left: 20px;
+    margin-right: 445px;
+    max-width: calc(100%);
+    box-sizing: border-box;
+    margin-bottom: 20px; /* .main-content 영역 아래에 50픽셀 여백 추가 */
+}
+
+/* 가사 텍스트와 이미지 등 메인 콘텐츠 내부 요소 중앙 정렬 */
+.main-content p,
+.main-content pre,
+.main-content div.lyrics, /* lyrics 클래스에도 적용 */
+.main-content .song-album,
+.main-content .song-album-korean,
+.main-content .song-image-container {
+    max-width: 800px; /* 가사 내용이 너무 길게 늘어나지 않도록 최대 너비 설정 */
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    margin-left: auto; /* 좌우 마진을 자동으로 설정하여 중앙 정렬 */
+    margin-right: auto;
+}
+
+.sidebar {
+    width: 385px; /* 사이드바의 너비 */
+    background-color: #1e2127; /* 사이드바 배경색 */
+    padding: 20px;
+    position: fixed; /* 요소를 화면에 고정 */
+    top: 0; /* 화면의 최상단에 고정 */
+    right: 0; /* 화면의 최우측에 고정 */
+    height: calc(87vh - 0px); /* 화면 전체 높이 */
+    overflow-y: scroll; /* 내용이 길어지면 스크롤바 생성 */
+    box-shadow: -3px 0 5px rgba(0,0,0,0.3); /* 왼쪽 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+    padding-top: 100px; /* 헤더와 겹치지 않도록 위쪽 여백 조정 */
+}
+
+/* 사이드바 안의 목록 스타일 */
+.sidebar h1 {
+    font-size: 2em;
+    color: #B0B0B0;;
+    margin-top: -50px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar ul {
+    list-style: none; /* 목록 앞의 점/기호 제거 */
+    padding: 0; /* 목록 기본 패딩 제거 */
+    margin: 0px 0;
+    margin-bottom: 0px;
+}
+
+.sidebar ul ul { /* 중첩된 ul에 좌측 패딩 추가하여 들여쓰기 효과 */
+    margin: 15px 0;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+
+.sidebar h3, .sidebar h4 {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.sidebar a {
+    display: block; /* 링크 전체 영역을 클릭 가능하게 */
+    padding: 8px 10px;
+    color: #98c379;
+    text-decoration: none;
+    transition: background-color 0.15s ease; /* 호버 시 부드러운 전환 효과 */
+    border-radius: 4px;
+}
+
+.sidebar a:hover {
+    background-color: #3a3f47; /* 호버 시 배경색 변경 */
+    color: #61dafb;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-top: 1px solid #444;
+    color: #b0b0b0;
+    font-size: 0.9em;
+}
+
+/* --- 노래 가사 페이지 관련 스타일 (기존과 동일) --- */
+/* song1.html에도 적용되도록 이 부분을 style.css에 그대로 유지 */
+header {
+    /* 이 부분은 song1.html에도 적용될 수 있도록 header 스타일을 분리했습니다. */
+    /* 위에 이미 정의했으므로 이 부분은 삭제하거나 주석 처리해도 됩니다. */
+}
+
+.song-album {
+    font-size: 1.8em;
+    color: #ffffff;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: -20px;
+    font-weight: bold;
+}
+
+.song-album-korean {
+    font-size: 1.2em;
+    color: #ffffff;
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 70px;
+    font-weight: bold;
+}
+
+main { /* .main-content와 이름이 겹치므로 song1.html에는 class="song-lyrics-main" 등으로 변경하는 것이 좋습니다 */
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 20px;
+    background-color: #3a3f47;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lyrics {
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1em;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #e0e0e0;
+}
+
+.song-title {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.song-title-korean {
+    font-size: 1.2em;
+    margin-top: -20px;
+}
+
+.song-image-container {
+    text-align: center; /* 이미지 가운데 정렬 (이미지가 블록 요소가 아닐 때) */
+    margin: 70px 0 20px 0;
+}
+
+/* 이미지 자체 스타ㅋ일 */
+.song-image-container img {
+    max-width: 100%; /* 부모 요소(컨테이너) 너비를 넘지 않도록 최대 너비 설정 */
+    height: auto; /* 가로 비율에 맞춰 세로 비율 자동 조절 (이미지 깨짐 방지) */
+    width: 250px; /* 이미지의 실제 너비를 300픽셀로 설정 (원하는 크기로 조절) */
+    display: block; /* margin: auto를 위해 블록 요소로 변경 */
+    margin: 0 auto; /* 이미지를 가운데 정렬 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* 그림자 효과 */
+}
+
+li.accordion-item {
+    margin-bottom: 10px;
+    /* border: 1px solid #3a3f47; /* 이 줄을 삭제하거나 주석 처리하여 테두리를 제거합니다 */ */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0;
+    list-style: none;
+}
+
+.accordion-header {
+    background-color: transparent;
+    color: #6da5af;
+    padding: 5px 0px;
+    margin-bottom: 0px;
+    width: 100%; /* 버튼 너비를 100%로 설정 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    border: none; /* 버튼 기본 테두리 제거 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    font-size: 1.1em;
+    outline: none; /* 클릭 시 나타나는 외곽선 제거 */
+    display: flex; /* h2를 중앙에 배치하기 위함 */
+    align-items: center; /* h2를 수직 중앙 정렬 */
+    transition: background-color 0.15s ease; /* 호버 시 부드러운 전환 */
+}
+
+.accordion-header h2 { /* h3 대신 h2로 변경 */
+    margin: 0; /* h2의 기본 마진 제거 */
+    flex-grow: 1; /* h2가 남은 공간을 차지하도록 */
+}
+
+.accordion-header:hover {
+    background-color: transparent; /* 호버 시 배경색 변경 */
+    color: #ffffff;
+}
+
+/* 활성화된 헤더 (JavaScript에서 .active 클래스 추가) */
+.accordion-header.active {
+    background-color: transparent;
+    color: #c28ace;
+}
+
+
+/* 아코디언 내용 */
+.accordion-content {
+    background-color: transparent;
+    max-height: 0; /* 기본적으로 내용을 숨김 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    transition: max-height 0.15s ease-out; /* 펼쳐질 때 부드러운 전환 효과 */
+}
+
+/* 아코디언 내용이 펼쳐졌을 때 (JavaScript에서 .active 클래스 추가) */
+.accordion-content.active {
+    max-height: 5000px; /* 충분히 큰 값으로 설정하여 내용이 다 보이도록 (내용 길이에 따라 조절) */
+}
+
+/* 아코디언 내용 내부의 ul, li, h3, h4, a 태그 스타일 조정 */
+.accordion-content ul {
+    list-style: none; /* 기본 점 제거 */
+    padding: 0;
+    margin: 0;
+}
+
+.accordion-content ul ul { /* 중첩된 ul에 들여쓰기 */
+    padding-left: 15px;
+}
+.accordion-content h3 { /* 앨범 제목 h3 */
+    color: #6da5af;
+    font-size: 1.1em;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.accordion-content h4 { /* 혹시 h4가 사용된다면 */
+    color: #b0b0b0;
+    font-size: 1em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.accordion-content li {
+    margin-bottom: 0px;
+}
+
+.accordion-content a {
+    display: block;
+    padding: 5px 8px;
+    color: #98c379;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.accordion-content a:hover {
+    background-color: #3a3f47;
+    color: #61dafb;
+}
+
+.album-header {
+    cursor: pointer; /* 마우스 올렸을 때 손가락 모양으로 변경 */
+    color: #6da5af;
+    font-size: 1.1em;
+    margin-top: -25px;
+    margin-bottom: -15px;
+    padding: 5px 8px; /* 클릭 영역을 살짝 넓혀줌 */
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.album-header:hover {
+    background-color: #3a3f47;
+    color: #ffffff;
+}
+
+/* 앨범 제목이 활성화되었을 때 */
+.album-header.active {
+    color: #c28ace; /* 활성화 시 색상 변경 */
+}
+
+/* 앨범 노래 목록 (펼쳐질 내용) */
+.album-content {
+    list-style: none;
+    padding-left: 15px; /* 들여쓰기 */
+    margin: 0;
+    max-height: 0; /* 기본적으로 숨김 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    transition: max-height 0.15s ease-out; /* 펼쳐질 때 부드러운 전환 효과 */
+}
+
+.song-read-korean {
+    margin-top: -20px;
+}
